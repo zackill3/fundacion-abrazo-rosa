@@ -31,7 +31,8 @@ La plataforma ofrece un sitio institucional responsive y un área administrativa
 - Panel administrativo protegido mediante un guard de Angular.
 - Edición administrativa de la política de tratamiento de datos.
 - Sección pública de transparencia sincronizada con Laravel.
-- Gestión local de documentos y cuentas administrativas.
+- Gestión real de múltiples cuentas administrativas mediante Laravel Cloud.
+- Creación, activación y cambio seguro de contraseñas desde el panel.
 - Métricas locales de visitas, páginas vistas y clics.
 - Edición del perfil administrativo.
 
@@ -219,6 +220,17 @@ Los archivos se guardan actualmente en **IndexedDB**, por lo que permanecen desp
 El panel administrativo contiene una vista de **Transparencia**. La política se
 guarda en la API Laravel mediante una ruta protegida y se consulta públicamente
 desde `/transparencia`. La portada también muestra un extracto actualizado.
+
+---
+
+## Gestión de administradores
+
+La vista **Usuarios** del panel consulta las cuentas administradoras almacenadas
+en Laravel Cloud. Desde allí se pueden crear varias cuentas independientes,
+activar o desactivar cuentas y asignar una nueva contraseña de acceso. Las
+contraseñas nunca se muestran ni se guardan en el navegador; Laravel las
+almacena mediante hash. Al cambiar una contraseña se revocan las sesiones
+anteriores de esa cuenta.
 
 ---
 

@@ -619,7 +619,10 @@ Responsabilidades principales:
 - Marcar documentos como públicos o privados.
 - Cambiar la visibilidad posteriormente.
 - Eliminar documentos.
-- Agregar y activar/desactivar administradores locales.
+- Consultar los administradores almacenados en la API.
+- Crear varias cuentas administrativas con correo y contraseña independientes.
+- Activar o desactivar cuentas sin permitir desactivar la sesión propia.
+- Cambiar contraseñas y revocar las sesiones anteriores de la cuenta afectada.
 - Editar el perfil.
 - Cerrar sesión.
 
@@ -632,6 +635,7 @@ Construye toda la interfaz del panel:
 - Gestión de documentos.
 - Formulario de carga.
 - Tabla de administradores.
+- Formularios para crear cuentas y cambiar contraseñas.
 - Gráficas horizontales de actividad.
 - Formulario de perfil.
 - Información de seguridad.

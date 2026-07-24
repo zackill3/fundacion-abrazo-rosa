@@ -64,7 +64,91 @@
     }
 
     @if(active()==='users'){
-      <section class="users-layout"><div class="card panel"><h2>Cuentas administrativas</h2><p class="muted">Solo estas personas pueden acceder a este panel.</p><div class="table-wrap"><table><thead><tr><th>Administrador</th><th>Rol</th><th>Estado</th><th>Acción</th></tr></thead><tbody>@for(user of users();track user.id){<tr><td><strong>{{user.name}}</strong><small>{{user.email}}</small></td><td><span class="role">Administrador</span></td><td><span class="status" [class.off]="user.status==='Inactivo'">{{user.status}}</span></td><td><button class="text-button" (click)="toggleUser(user.id)">{{user.status==='Activo'?'Desactivar':'Activar'}}</button></td></tr>}</tbody></table></div></div><div class="card panel invite"><h2>Agregar administrador</h2><p class="muted">Crea una nueva cuenta autorizada.</p><form (ngSubmit)="addAdmin()"><div class="field"><label for="new-name">Nombre</label><input id="new-name" name="newName" [(ngModel)]="newName" placeholder="Nombre completo"></div><div class="field"><label for="new-email">Correo</label><input id="new-email" name="newEmail" [(ngModel)]="newEmail" type="email" placeholder="correo@fundacion.org"></div><button class="btn btn-primary" type="submit">Agregar administrador</button></form></div></section>
+      <section class="users-layout">
+        <div class="card panel">
+          <div class="panel-head">
+            <div>
+              <h2>Cuentas administrativas</h2>
+              <p>Estas personas pueden ingresar al panel con su propio correo y contraseña.</p>
+            </div>
+            <span class="admin-count">{{ users().length }} cuentas</span>
+          </div>
+          @if(usersMessage()){<p class="notice">{{usersMessage()}}</p>}
+          @if(adminUsers.loading() && !users().length){
+            <div class="admin-empty"><p>Cargando administradores…</p></div>
+          } @else {
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Administrador</th><th>Estado</th><th>Acciones</th></tr></thead>
+                <tbody>
+                  @for(user of users();track user.id){
+                    <tr>
+                      <td>
+                        <strong>{{user.name}} @if(isCurrentUser(user.id)){<span class="current-user">Tú</span>}</strong>
+                        <small>{{user.email}}</small>
+                      </td>
+                      <td><span class="status" [class.off]="!user.is_active">{{user.is_active ? 'Activo' : 'Inactivo'}}</span></td>
+                      <td>
+                        <div class="user-actions">
+                          <button class="text-button" type="button" (click)="startPasswordChange(user)">Cambiar contraseña</button>
+                          <button
+                            class="text-button"
+                            type="button"
+                            [disabled]="isCurrentUser(user.id)"
+                            (click)="toggleUser(user)"
+                          >{{isCurrentUser(user.id) ? 'Tu cuenta' : (user.is_active ? 'Desactivar' : 'Activar')}}</button>
+                        </div>
+                      </td>
+                    </tr>
+                  } @empty {
+                    <tr><td colspan="3">No se encontraron cuentas administradoras.</td></tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+        <div class="card panel invite">
+          @if(passwordUser(); as selectedUser){
+            <h2>Cambiar contraseña</h2>
+            <p class="muted">Nueva contraseña para <strong>{{selectedUser.name}}</strong>. Sus sesiones anteriores se cerrarán.</p>
+            <form (ngSubmit)="saveAdminPassword()">
+              <div class="field">
+                <label for="edit-password">Nueva contraseña</label>
+                <input id="edit-password" name="editPassword" [(ngModel)]="editPassword" type="password" minlength="8" autocomplete="new-password" placeholder="Mínimo 8 caracteres" required>
+              </div>
+              <div class="field">
+                <label for="edit-password-confirmation">Confirmar contraseña</label>
+                <input id="edit-password-confirmation" name="editPasswordConfirmation" [(ngModel)]="editPasswordConfirmation" type="password" minlength="8" autocomplete="new-password" placeholder="Repite la nueva contraseña" required>
+              </div>
+              <button class="btn btn-primary" type="submit" [disabled]="adminUsers.loading()">Guardar contraseña</button>
+              <button class="btn btn-outline" type="button" (click)="cancelPasswordChange()">Cancelar</button>
+            </form>
+          } @else {
+            <h2>Agregar administrador</h2>
+            <p class="muted">Crea otra cuenta con acceso independiente al panel.</p>
+            <form (ngSubmit)="addAdmin()">
+              <div class="field">
+                <label for="new-name">Nombre</label>
+                <input id="new-name" name="newName" [(ngModel)]="newName" autocomplete="name" placeholder="Nombre completo" required>
+              </div>
+              <div class="field">
+                <label for="new-email">Correo</label>
+                <input id="new-email" name="newEmail" [(ngModel)]="newEmail" type="email" autocomplete="email" placeholder="correo@fundacion.org" required>
+              </div>
+              <div class="field">
+                <label for="new-password">Contraseña de acceso</label>
+                <input id="new-password" name="newPassword" [(ngModel)]="newPassword" type="password" minlength="8" autocomplete="new-password" placeholder="Mínimo 8 caracteres" required>
+              </div>
+              <div class="field">
+                <label for="new-password-confirmation">Confirmar contraseña</label>
+                <input id="new-password-confirmation" name="newPasswordConfirmation" [(ngModel)]="newPasswordConfirmation" type="password" minlength="8" autocomplete="new-password" placeholder="Repite la contraseña" required>
+              </div>
+              <button class="btn btn-primary" type="submit" [disabled]="adminUsers.loading()">{{adminUsers.loading() ? 'Guardando…' : 'Agregar administrador'}}</button>
+            </form>
+          }
+        </div>
+      </section>
     }
 
     @if(active()==='analytics'){
