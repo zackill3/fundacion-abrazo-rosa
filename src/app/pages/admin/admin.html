@@ -1,6 +1,6 @@
 <div class="admin-shell">
   <aside>
-    <div class="admin-brand"><span>AR</span><div><strong>Abrazo Rosa</strong><small>Administración</small></div></div>
+    <div class="admin-brand"><app-brand-heart aria-hidden="true" /><div><strong>Abrazo Rosa</strong><small>Administración</small></div></div>
     <nav>
       <button [class.active]="active()==='summary'" (click)="setView('summary')"><span>▦</span> Resumen</button>
       <button [class.active]="active()==='documents'" (click)="setView('documents')"><span>▤</span> Documentos</button>

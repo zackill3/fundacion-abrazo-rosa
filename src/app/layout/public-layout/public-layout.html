@@ -1,7 +1,7 @@
 <header class="header">
   <div class="container nav">
     <a routerLink="/" class="brand" (click)="menuOpen.set(false)">
-      <span class="brand-mark">AR</span>
+      <app-brand-heart class="brand-mark" aria-hidden="true" />
       <span><strong>Abrazo Rosa</strong><small>Fundación</small></span>
     </a>
     <button class="menu" type="button" aria-label="Abrir menú" (click)="menuOpen.update(v => !v)">☰</button>
@@ -19,7 +19,7 @@
 <main><router-outlet /></main>
 <footer>
   <div class="container footer-grid">
-    <div><div class="brand footer-brand"><span class="brand-mark">AR</span><span><strong>Abrazo Rosa</strong><small>Fundación</small></span></div><p>Equidad, participación ciudadana y transformación social desde Cali.</p></div>
+    <div><div class="brand footer-brand"><app-brand-heart class="brand-mark" aria-hidden="true" /><span><strong>Abrazo Rosa</strong><small>Fundación</small></span></div><p>Equidad, participación ciudadana y transformación social desde Cali.</p></div>
     <div><h4>Explora</h4><a routerLink="/quienes-somos">Quiénes somos</a><a routerLink="/que-hacemos">Qué hacemos</a><a routerLink="/documentos">Documentos públicos</a><a routerLink="/transparencia">Tratamiento de datos</a></div>
     <div><h4>Contacto</h4><p>Cali, Valle del Cauca</p><a href="mailto:fundacionabrazorosa@gmail.com">fundacionabrazorosa&#64;gmail.com</a><p>NIT: 901592937-9</p></div>
   </div>

@@ -6,10 +6,11 @@ import { DocumentsService, DocumentVisibility } from '../../core/services/docume
 import { AnalyticsService } from '../../core/services/analytics.service';
 import { AdminUser, AdminUsersService } from '../../core/services/admin-users.service';
 import { InstitutionalInformationService } from '../../core/services/institutional-information.service';
+import { BrandHeart } from '../../shared/brand-heart/brand-heart';
 
 type AdminView = 'summary' | 'documents' | 'content' | 'users' | 'analytics' | 'profile';
 
-@Component({ selector: 'app-admin', imports: [FormsModule, RouterLink], templateUrl: './admin.html', styleUrl: './admin.scss' })
+@Component({ selector: 'app-admin', imports: [FormsModule, RouterLink, BrandHeart], templateUrl: './admin.html', styleUrl: './admin.scss' })
 export class Admin {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
