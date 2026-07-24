@@ -5,6 +5,7 @@ import { About } from './pages/about/about';
 import { Programs } from './pages/programs/programs';
 import { Presence } from './pages/presence/presence';
 import { Documents } from './pages/documents/documents';
+import { Transparency } from './pages/transparency/transparency';
 import { Login } from './pages/auth/login';
 import { Signup } from './pages/auth/signup';
 import { Admin } from './pages/admin/admin';
@@ -20,6 +21,7 @@ export const routes: Routes = [
       { path: 'que-hacemos', component: Programs, title: 'Qué hacemos | Abrazo Rosa' },
       { path: 'presencia', component: Presence, title: 'Presencia | Abrazo Rosa' },
       { path: 'documentos', component: Documents, title: 'Documentos públicos | Abrazo Rosa' },
+      { path: 'transparencia', component: Transparency, title: 'Transparencia | Abrazo Rosa' },
     ],
   },
   { path: 'login', component: Login, title: 'Iniciar sesión | Abrazo Rosa' },

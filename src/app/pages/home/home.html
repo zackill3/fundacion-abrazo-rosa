@@ -11,4 +11,18 @@
 </section>
 <section class="purpose"><div class="container"><span class="eyebrow">Nuestro propósito</span><div class="purpose-grid"><h2 class="section-title">Un abrazo puede ser el comienzo de una transformación.</h2><p class="lead">Desarrollamos programas, proyectos e iniciativas orientadas a la defensa de los derechos de las mujeres, el liderazgo femenino y la construcción de entornos más justos e inclusivos.</p></div></div></section>
 <section class="pillars"><div class="container cards"><article><span>01</span><h3>Equidad</h3><p>Defendemos oportunidades y derechos para todas las personas.</p></article><article><span>02</span><h3>Empoderamiento</h3><p>Fortalecemos capacidades y liderazgos que transforman territorios.</p></article><article><span>03</span><h3>Comunidad</h3><p>Creamos redes de apoyo, cuidado y participación ciudadana.</p></article></div></section>
+@if (policyPreview()) {
+  <section class="transparency-preview">
+    <div class="container transparency-box">
+      <div>
+        <span class="eyebrow">Transparencia institucional</span>
+        <h2 class="section-title">Protegemos tus datos personales.</h2>
+        <p>{{ policyPreview() }}</p>
+      </div>
+      <a routerLink="/transparencia" class="btn btn-outline">
+        Consultar política completa <span>→</span>
+      </a>
+    </div>
+  </section>
+}
 <section class="cta"><div class="container cta-box"><div><span class="eyebrow">Súmate</span><h2 class="section-title">Hay muchas formas de abrazar una causa.</h2></div><a routerLink="/presencia" fragment="contacto" class="btn btn-primary">Contáctanos</a></div></section>

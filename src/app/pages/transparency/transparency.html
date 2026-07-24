@@ -1,0 +1,43 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Transparencia institucional</span>
+    <h1 class="section-title">Política de tratamiento de datos personales</h1>
+    <p class="lead">
+      Conoce cómo la Fundación Abrazo Rosa protege y trata la información
+      personal de su comunidad.
+    </p>
+  </div>
+</section>
+
+<section class="transparency-content">
+  <div class="container">
+    <article class="card policy-card">
+      <div class="policy-heading">
+        <div>
+          <span class="eyebrow">Documento institucional</span>
+          <h2>Tratamiento de datos personales</h2>
+        </div>
+        @if (information.updatedAt()) {
+          <small>
+            Actualizada el {{ formattedDate(information.updatedAt()!) }}
+          </small>
+        }
+      </div>
+
+      @if (information.loading()) {
+        <p class="status">Cargando política…</p>
+      } @else if (information.error()) {
+        <p class="status error">{{ information.error() }}</p>
+      } @else if (information.dataProcessingPolicy()) {
+        <div class="policy-copy">
+          {{ information.dataProcessingPolicy() }}
+        </div>
+      } @else {
+        <p class="status">
+          La política de tratamiento de datos se encuentra en proceso de
+          publicación.
+        </p>
+      }
+    </article>
+  </div>
+</section>

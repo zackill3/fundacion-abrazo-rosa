@@ -29,12 +29,17 @@ La plataforma ofrece un sitio institucional responsive y un área administrativa
 - Visualizador de PDF dentro de la página.
 - Documentos públicos y privados.
 - Panel administrativo protegido mediante un guard de Angular.
+- Edición administrativa de la política de tratamiento de datos.
+- Sección pública de transparencia sincronizada con Laravel.
 - Gestión local de documentos y cuentas administrativas.
 - Métricas locales de visitas, páginas vistas y clics.
 - Edición del perfil administrativo.
 
 > [!IMPORTANT]
-> Esta versión funciona como prototipo frontend. La autenticación, las métricas y los documentos se almacenan localmente en el navegador. Para un entorno de producción se debe conectar un backend, una base de datos y un servicio seguro de almacenamiento de archivos.
+> La autenticación y la política de tratamiento de datos se conectan con la API
+> de Laravel en producción. Los documentos y las métricas del frontend todavía
+> conservan componentes de almacenamiento local que deben migrarse por completo
+> al backend.
 
 ---
 
@@ -50,6 +55,7 @@ La plataforma ofrece un sitio institucional responsive y un área administrativa
 - Local Storage y Session Storage
 - Vitest
 - Google Maps Embed
+- API Laravel desplegada en Laravel Cloud
 
 ---
 
@@ -186,6 +192,7 @@ la sesión contra la API antes de permitir el acceso.
 | `/que-hacemos` | Programas y áreas de trabajo | Público |
 | `/presencia` | Ubicación y contacto | Público |
 | `/documentos` | Biblioteca de documentos públicos | Público |
+| `/transparencia` | Política de tratamiento de datos personales | Público |
 | `/login` | Inicio de sesión administrativo | Restringido |
 | `/admin` | Panel administrativo | Solo administradores |
 
@@ -204,6 +211,14 @@ Desde el panel administrativo se puede:
 Los documentos públicos aparecen en `/documentos`. Los privados solamente son visibles desde el dashboard.
 
 Los archivos se guardan actualmente en **IndexedDB**, por lo que permanecen después de recargar la página, pero solo existen en el navegador y dispositivo donde fueron cargados.
+
+---
+
+## Política de tratamiento de datos
+
+El panel administrativo contiene una vista de **Transparencia**. La política se
+guarda en la API Laravel mediante una ruta protegida y se consulta públicamente
+desde `/transparencia`. La portada también muestra un extracto actualizado.
 
 ---
 

@@ -42,4 +42,19 @@ button { cursor: pointer; }
   .page-hero { padding: 60px 0 45px; }
 }
 
+.content-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; margin-top: 32px; }
+.content-card { padding: 30px; }
+.content-card form { display: grid; gap: 18px; }
+.content-card textarea { min-height: 320px; resize: vertical; line-height: 1.6; }
+.content-card .btn { justify-self: end; }
+.content-card .btn:disabled { opacity: .65; cursor: wait; }
+.content-help { padding: 28px; background: #371b29; color: #fff; }
+.content-help span { color: #f08bb3; font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.content-help h2 { margin: 13px 0; font: 700 1.5rem 'Alegreya'; }
+.content-help p { color: #ddcbd4; font-size: .86rem; line-height: 1.65; }
+
+@media (max-width: 1100px) {
+  .content-layout { grid-template-columns: 1fr; }
+}
+
 

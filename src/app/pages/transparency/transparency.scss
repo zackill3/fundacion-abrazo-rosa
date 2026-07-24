@@ -1,0 +1,54 @@
+.transparency-content {
+  padding: 70px 0 100px;
+}
+
+.policy-card {
+  max-width: 920px;
+  margin-inline: auto;
+  padding: clamp(28px, 5vw, 58px);
+}
+
+.policy-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.policy-heading h2 {
+  margin: 10px 0 0;
+  font: 700 clamp(1.6rem, 3vw, 2.25rem) 'Alegreya';
+}
+
+.policy-heading small,
+.status {
+  color: var(--muted);
+}
+
+.policy-copy {
+  margin-top: 34px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 1.02rem;
+  line-height: 1.85;
+}
+
+.status {
+  margin: 34px 0 0;
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--pink-soft);
+}
+
+.status.error {
+  color: #8c1748;
+}
+
+@media (max-width: 650px) {
+  .policy-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

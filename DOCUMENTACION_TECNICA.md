@@ -248,6 +248,7 @@ Rutas públicas dentro de `PublicLayout`:
 - `/que-hacemos`
 - `/presencia`
 - `/documentos`
+- `/transparencia`
 
 Rutas independientes:
 
@@ -328,6 +329,16 @@ Funciones principales:
 
 Los archivos se guardan en IndexedDB, dentro de la base local `abrazo-rosa` y el almacén `documents`.
 
+### `src/app/core/services/institutional-information.service.ts`
+
+Conecta Angular con la información institucional almacenada en Laravel:
+
+- Consulta públicamente `/api/institutional-information`.
+- Actualiza la política mediante `/api/admin/institutional-information`.
+- Envía el token administrativo en las operaciones protegidas.
+- Expone señales con la política, la fecha de actualización, el estado de carga
+  y los errores.
+
 ### `src/app/core/services/analytics.service.ts`
 
 Registra métricas básicas del sitio público:
@@ -396,6 +407,7 @@ Construye la página principal:
 - Mensaje institucional.
 - Propósito de la Fundación.
 - Pilares de equidad, empoderamiento y comunidad.
+- Extracto de la política de tratamiento de datos cuando está publicada.
 - Llamado a contactar a la organización.
 
 #### `src/app/pages/home/home.scss`
@@ -499,6 +511,13 @@ También contiene:
 #### `src/app/pages/documents/documents.scss`
 
 Define el lateral color vino, controles blancos, distribución del listado, tarjetas PDF, modal del visualizador y comportamiento responsive.
+
+### Transparencia
+
+Los archivos `src/app/pages/transparency/transparency.ts`, `.html` y `.scss`
+construyen la página pública `/transparencia`. El texto se obtiene desde
+Laravel, conserva los saltos de línea y se renderiza como texto para impedir
+la inyección de HTML.
 
 ---
 

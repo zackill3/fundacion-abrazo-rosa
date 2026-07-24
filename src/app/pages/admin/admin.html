@@ -4,6 +4,7 @@
     <nav>
       <button [class.active]="active()==='summary'" (click)="setView('summary')"><span>▦</span> Resumen</button>
       <button [class.active]="active()==='documents'" (click)="setView('documents')"><span>▤</span> Documentos</button>
+      <button [class.active]="active()==='content'" (click)="setView('content')"><span>✎</span> Transparencia</button>
       <button [class.active]="active()==='users'" (click)="setView('users')"><span>♙</span> Usuarios</button>
       <button [class.active]="active()==='analytics'" (click)="setView('analytics')"><span>⌁</span> Métricas</button>
       <button [class.active]="active()==='profile'" (click)="setView('profile')"><span>○</span> Mi perfil</button>
@@ -12,7 +13,7 @@
     <button class="logout" (click)="logout()">Cerrar sesión</button>
   </aside>
   <main>
-    <header><div><span class="eyebrow">Panel administrativo</span><h1>@switch(active()){@case('summary'){Resumen general}@case('documents'){Gestión de documentos}@case('users'){Usuarios administradores}@case('analytics'){Métricas del sitio}@case('profile'){Mi perfil}}</h1></div><button class="avatar" (click)="setView('profile')">{{profileName.slice(0,2).toUpperCase()}}</button></header>
+    <header><div><span class="eyebrow">Panel administrativo</span><h1>@switch(active()){@case('summary'){Resumen general}@case('documents'){Gestión de documentos}@case('content'){Transparencia}@case('users'){Usuarios administradores}@case('analytics'){Métricas del sitio}@case('profile'){Mi perfil}}</h1></div><button class="avatar" (click)="setView('profile')">{{profileName.slice(0,2).toUpperCase()}}</button></header>
 
     @if(active()==='summary'){
       <section class="metrics four"><article><span>Visitas</span><strong>{{analytics().visits}}</strong><small>Sesiones registradas</small></article><article><span>Vistas de página</span><strong>{{analytics().pageViews}}</strong><small>Navegaciones públicas</small></article><article><span>Clics realizados</span><strong>{{analytics().clicks}}</strong><small>Interacciones públicas</small></article><article><span>Documentos</span><strong>{{documents().length}}</strong><small>{{store.publicDocuments().length}} públicos</small></article></section>
@@ -21,6 +22,45 @@
 
     @if(active()==='documents'){
       <section class="workspace"><div class="card upload"><h2>Agregar un documento</h2><p>Decide si será visible para todos o únicamente para administradores.</p><form (ngSubmit)="upload()"><div class="field"><label for="title">Título del documento</label><input id="title" name="title" [(ngModel)]="title" placeholder="Ej. Informe de gestión 2026"></div><div class="field"><label for="description">Descripción corta</label><textarea id="description" name="description" [(ngModel)]="description" rows="3" maxlength="220" placeholder="Resume brevemente el contenido del archivo"></textarea><small class="field-help">Máximo 220 caracteres</small></div><div class="document-meta"><div class="field"><label for="cat">Categoría</label><select id="cat" name="category" [(ngModel)]="category"><option>Informe</option><option>Certificación</option><option>Financiero</option><option>Otro</option></select></div><div class="field"><label for="document-date">Fecha del documento</label><input id="document-date" name="documentDate" type="date" [(ngModel)]="documentDate" required><small class="field-help">Fecha a la que corresponde el archivo</small></div></div><div class="visibility-choice"><label [class.selected]="visibility==='public'"><input type="radio" name="visibility" value="public" [(ngModel)]="visibility"><span>◉</span><strong>Público</strong><small>Visible en la página Documentos</small></label><label [class.selected]="visibility==='private'"><input type="radio" name="visibility" value="private" [(ngModel)]="visibility"><span>◌</span><strong>Privado</strong><small>Solo visible para administradores</small></label></div><label class="drop"><input type="file" accept="application/pdf" (change)="pick($event)"><span>PDF</span><strong>{{file?.name || 'Selecciona un archivo PDF'}}</strong><small>Haz clic para buscar en tu equipo</small></label>@if(message()){<p class="notice">{{message()}}</p>}<button class="btn btn-primary" type="submit">Guardar documento</button></form></div><div class="card recent"><div class="recent-head"><h2>Todos los documentos</h2><span>{{documents().length}}</span></div>@if(documents().length){@for(doc of documents();track doc.id){<article><div class="pdf">PDF</div><div><strong>{{doc.title}}</strong>@if(doc.description){<p class="admin-description">{{doc.description}}</p>}<small>{{doc.category}} · {{formatDocumentDate(doc.documentDate)}} · {{doc.size}}</small></div><button class="visibility-toggle" [class.private]="doc.visibility==='private'" type="button" (click)="changeVisibility(doc.id, doc.visibility==='public' ? 'private' : 'public')">{{doc.visibility==='public' ? 'Público' : 'Privado'}}</button><a [href]="doc.url" target="_blank">Ver</a><button type="button" (click)="remove(doc.id)" aria-label="Eliminar">×</button></article>}}@else{<div class="admin-empty"><span>▤</span><p>Aún no se han agregado documentos.</p></div>}</div></section>
+    }
+
+    @if(active()==='content'){
+      <section class="content-layout">
+        <div class="card content-card">
+          <div class="panel-head">
+            <div>
+              <h2>Tratamiento de datos</h2>
+              <p>El contenido guardado se publica en la portada y en la sección de Transparencia.</p>
+            </div>
+            <a class="text-button" routerLink="/transparencia" target="_blank" rel="noopener">Ver publicación ↗</a>
+          </div>
+          <form (ngSubmit)="saveDataProcessingPolicy()">
+            <div class="field">
+              <label for="data-processing-policy">Política de tratamiento de datos personales</label>
+              <textarea
+                id="data-processing-policy"
+                name="dataProcessingPolicy"
+                [(ngModel)]="dataProcessingPolicy"
+                rows="16"
+                maxlength="100000"
+                placeholder="Escribe o pega aquí la política aprobada por la entidad"
+                required
+              ></textarea>
+              <small class="field-help">{{ dataProcessingPolicy.length }} caracteres</small>
+            </div>
+            @if(policyMessage()){<p class="notice">{{policyMessage()}}</p>}
+            <button class="btn btn-primary" type="submit" [disabled]="institutionalInformation.loading()">
+              {{ institutionalInformation.loading() ? 'Guardando…' : 'Guardar y publicar' }}
+            </button>
+          </form>
+        </div>
+        <div class="card content-help">
+          <span>Publicación segura</span>
+          <h2>¿Dónde aparecerá?</h2>
+          <p>La portada mostrará un extracto y la página de Transparencia conservará el texto completo con sus saltos de línea.</p>
+          <p>Solo las cuentas administradoras autenticadas pueden modificar esta información.</p>
+        </div>
+      </section>
     }
 
     @if(active()==='users'){
