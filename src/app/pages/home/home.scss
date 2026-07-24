@@ -1,0 +1,15 @@
+﻿.hero { min-height: 690px; display: grid; align-items: center; overflow: hidden; background: radial-gradient(circle at 85% 30%, #f9cada 0, transparent 28%), linear-gradient(120deg, #fff 30%, #fff1f6); }
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 70px; }
+.hero .lead { max-width: 630px; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.hero-art { position: relative; min-height: 470px; }
+.circle { position: absolute; border-radius: 50%; }
+.circle-one { width: 390px; height: 390px; top: 35px; right: 0; background: linear-gradient(145deg, var(--pink), #f08bb3); box-shadow: 0 35px 70px rgba(140,23,72,.25); }
+.circle-two { width: 190px; height: 190px; left: 15px; bottom: 0; border: 35px solid #f3b8cc; }
+.message { position: absolute; width: 270px; left: 0; top: 150px; padding: 26px; display: grid; gap: 8px; background: rgba(255,255,255,.92); border: 1px solid #fff; border-radius: 22px; box-shadow: var(--shadow); }
+.message span { color: var(--pink); font-size: 1.4rem; }.message strong { font: 700 1.5rem 'Alegreya'; }.message small { color: var(--muted); line-height: 1.5; }
+.purpose { padding: 105px 0 70px; }.purpose-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; }.purpose-grid .lead { padding-bottom: 9px; }
+.pillars { padding: 0 0 100px; }.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }.cards article { padding: 32px; border: 1px solid var(--line); background: #fff; border-radius: 22px; }.cards span { color: var(--pink); font-weight: 700; }.cards h3 { font: 700 1.55rem 'Alegreya'; margin: 35px 0 12px; }.cards p { color: var(--muted); line-height: 1.6; }
+.cta { padding-bottom: 100px; }.cta-box { padding: 55px; border-radius: 30px; display: flex; align-items: center; justify-content: space-between; gap: 30px; background: var(--pink-soft); }.cta-box .section-title { max-width: 650px; margin-bottom: 0; }
+@media (max-width: 850px) { .hero { min-height: auto; padding: 70px 0; }.hero-grid { grid-template-columns: 1fr; }.hero-art { min-height: 350px; }.circle-one { width: 300px; height: 300px; }.purpose-grid { grid-template-columns: 1fr; gap: 5px; }.cards { grid-template-columns: 1fr; }.cta-box { align-items: flex-start; flex-direction: column; padding: 34px; } }
+
