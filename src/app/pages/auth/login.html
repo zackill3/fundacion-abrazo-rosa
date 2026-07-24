@@ -1,7 +1,0 @@
-<main class="auth-page">
-  <a routerLink="/" class="back">← Volver al inicio</a>
-  <section class="auth-card">
-    <div class="auth-copy"><span class="logo">AR</span><span class="eyebrow">Acceso restringido</span><h1>Administración</h1><p>Ingresa con la cuenta administrativa almacenada de forma segura en el servidor.</p><div class="demo"><strong>Autenticación segura</strong><span>Las contraseñas se validan mediante la API y nunca se guardan en el navegador.</span></div></div>
-    <form (ngSubmit)="submit()"><div class="field"><label for="email">Correo electrónico</label><input id="email" type="email" name="email" [(ngModel)]="email" placeholder="admin@fundacion.org" autocomplete="email" required></div><div class="field"><label for="password">Contraseña</label><input id="password" type="password" name="password" [(ngModel)]="password" placeholder="Tu contraseña" autocomplete="current-password" required></div>@if(error()){<p class="error">{{error()}}</p>}<button class="btn btn-primary" type="submit" [disabled]="loading()">{{loading() ? 'Ingresando…' : 'Iniciar sesión'}}</button><p class="switch">¿Necesitas registrar un administrador? <a routerLink="/registro">Crear cuenta</a></p></form>
-  </section>
-</main>
