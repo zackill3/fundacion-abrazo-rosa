@@ -25,8 +25,9 @@ export class AuthService {
   }
 
   async updateProfile(name: string, email: string): Promise<void> {
-    const result = await firstValueFrom(this.http.patch<AuthResponse>(`${this.apiUrl}/me`, { name, email }, { headers: this.authHeaders() }));
-    this.saveAuth(result);
+    const result = await firstValueFrom(this.http.patch<{ user: Session }>(`${this.apiUrl}/me`, { name, email }, { headers: this.authHeaders() }));
+    this.session.set(result.user);
+    localStorage.setItem('abrazo-session', JSON.stringify(result.user));
   }
 
   async validateSession(): Promise<boolean> {
